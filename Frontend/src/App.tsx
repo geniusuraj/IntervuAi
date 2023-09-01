@@ -1,15 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
-import All_Routes from './Components/All_Routes'
+// import All_Routes from './Components/All_Routes'
+import Category from './Pages/Category'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
 
   return (
     <>
-     <All_Routes/>
+    {/* <All_Routes/> */}
+    <Category/>
     </>
   )
 }
