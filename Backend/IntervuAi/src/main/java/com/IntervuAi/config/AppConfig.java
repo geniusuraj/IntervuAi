@@ -11,7 +11,7 @@ public class AppConfig {
 
 	@Value("${openai.api.key}")
 	private String key;
-	
+	@Bean
 	public RestTemplate templete() {
 		RestTemplate restTemplate = new RestTemplate();
 		
