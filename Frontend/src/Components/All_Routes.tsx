@@ -1,17 +1,11 @@
-// import React from "react";
-import {Route, Routes} from 'react-router-dom'
-import Category from '../Pages/Category';
-
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 const All_Routes = () => {
-  return <div>
-
-<Routes>
-  <Route path="/" element={<Category/>} />
-  <Route path="/node" element={<Category/>} />
-  <Route path="/mern" element={<Category/>} />
-  <Route path="/java" element={<Category/>} />
-</Routes>
-  </div>;
-}
+  return (
+    <div>
+      <Routes></Routes>
+    </div>
+  );
+};
 
 export default All_Routes;
