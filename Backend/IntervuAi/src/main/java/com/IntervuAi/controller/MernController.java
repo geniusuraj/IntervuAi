@@ -40,11 +40,9 @@ public class MernController {
 			+ "4. Problem Solving skills\r\n"
 			+ "Feedback for Subject Matter Expertise and Communication skills should contain ratings on my interview responses from 0 - 10```";
 	
-    @GetMapping("/Mern")
-	public ResponseEntity<String>  getMernQuestion(){
-    	String resp=botService.getResponse(promptes);
-    	return new ResponseEntity<>(resp,HttpStatus.OK);
-		
-		
-	}
+//    @GetMapping("/Mern")
+//	public ResponseEntity<String>  getMernQuestion(){
+//    	String resp=botService.getResponse(promptes);
+//    	return new ResponseEntity<>(resp,HttpStatus.OK);
+//	}
 }
