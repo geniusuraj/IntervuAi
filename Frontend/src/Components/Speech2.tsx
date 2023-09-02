@@ -2,56 +2,71 @@ import React, { useState, useEffect } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import Video from './Video';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchQuestion, postQuestionAnswer } from '../Redux/nodeReducer/action';
+import { NEXT_QUESTION } from '../Redux/nodeReducer/actionType';
 
-const Speech = () => {
+const Speech2 = () => {
   const [text, setText] = useState('');
-  const [question, setQuestion] = useState([]);
+  const [interviewStart, setInterviewStarted] = useState(false);
   const [currentQuestion, setCurrent] = useState(0);
-  const [interviewStarted, setInterviewStarted] = useState(false);
 
-  const dispatch = useDispatch();
+  const questions = useSelector((state: any) => state.questions);
+  const loading = useSelector((state: any) => state.loading);
+ const currentQuestionIndex = useSelector((state:any) => state.currentQuestionIndex)
+  
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:8080/bot/node")
-  //     .then((res) => {
-  //       console.log(res.data);
+const dispatch = useDispatch();
 
-       
-  //       const paragraphs = res.data.split('\n');
+  useEffect(() => {
+    dispatch<any>(fetchQuestion()); 
+  }, [dispatch]);
 
-       
-  //       const questionsArray = paragraphs.filter((paragraph:any) => /^\d+\.\s/.test(paragraph));
-  //       setQuestion(questionsArray);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  // }, [])
+ const handleStartInterview = () => {
+    setInterviewStarted(true);
+  };
+
+  // const handleNextQuestion = () => {
+  //   if (currentQuestion < questions.length - 1) {
+  //     setCurrent(currentQuestion + 1);
+  //   }
+   
+  // };
+
+
+
 
   const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
 
   const resetTranscript = () => {
     SpeechRecognition.stopListening();
-    setText(''); // Clear the textarea
-    SpeechRecognition.startListening(); // Restart listening
+    setText(''); 
+    // SpeechRecognition.startListening(); 
   };
 
+
+  
   const { listening, transcript, browserSupportsSpeechRecognition } = useSpeechRecognition();
 
   if (!browserSupportsSpeechRecognition) {
     return null;
   }
 
-  const handleStartInterview = () => {
-    setInterviewStarted(true);
-  };
 
+  
   const handleNextQuestion = () => {
-    if (currentQuestion < question.length - 1) {
+    if (currentQuestion < questions.length - 1) {
+    
+      dispatch<any>(postQuestionAnswer(questions[currentQuestion], transcript));
       setCurrent(currentQuestion + 1);
+     
+      console.log(questions[currentQuestion],transcript);
+      
     }
   };
+
+ 
+  
 
   return (
     <div className="flex">
@@ -60,23 +75,26 @@ const Speech = () => {
       </div>
       <div className="w-1/2 p-4">
         <div className="container mx-auto p-4 shadow-lg bg-neutral-100">
-          {!interviewStarted && (
-            <button onClick={handleStartInterview} className='bg-gray-500 text-white px-4 py-2 font-medium rounded-full hover:bg-gray-600'>
-              Start interview
-            </button>
-          )}
+          
 
-          {interviewStarted && (
+        <div className="container mx-auto p-4 shadow-lg bg-neutral-100">
+          
+{
+  loading?"Loading...":
+  <button onClick={handleStartInterview} className='bg-gray-500 text-white px-4 py-2 font-medium rounded-full hover:bg-gray-600'>
+  Start interview
+</button>
+}
+
+    {interviewStart && (
             <>
-              <h3 className="text-2xl font-bold mb-4">{question[currentQuestion]}</h3>
-              <button onClick={handleNextQuestion} className='bg-gray-500 text-white px-4 py-2 font-medium rounded-full hover:bg-gray-600'>
+              <h3 className="text-2xl font-bold mb-4">{questions[currentQuestion]}</h3>
+              <button  onClick={handleNextQuestion} className='bg-gray-500 text-white px-4 py-2 font-medium rounded-full hover:bg-gray-600'>
                   Next
                 </button>
             
             
-              {/* <div className="main-content border rounded p-4 mb-4">
-                {transcript}
-              </div> */}
+              
               <div className="btn-style">
                 <textarea
                   name=""
@@ -102,10 +120,18 @@ const Speech = () => {
               </div>
             </>
           )}
+         
+
+        
+           
+         
+        </div>
+
+          
         </div>
       </div>
     </div>
   );
 };
 
-export default Speech;
+export default Speech2;
