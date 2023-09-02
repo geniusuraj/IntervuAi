@@ -59,9 +59,7 @@ export default function Video() {
       <div className="mt-4">
         <video ref={recordWebcam.webcamRef} autoPlay muted className="w-full max-w-md" />
       </div>
-      {/* <div className="mt-4">
-        <video ref={recordWebcam.previewRef} autoPlay muted loop className="w-full max-w-md" />
-      </div> */}
+      
     </div>
   );
 }
