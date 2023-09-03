@@ -28,7 +28,7 @@ const Signup = () => {
     e.preventDefault();
 
     axios
-      .post("", data)
+      .post("http://localhost:8080/auth/signup", data)
       .then((res) => {
         console.log(res.data);
         toast({

@@ -21,7 +21,7 @@ const Login = () => {
     };
 
     axios
-      .post("", data)
+      .post("http://localhost:8080/auth/signin", data)
       .then((res) => {
         console.log(res.data);
         console.log(res.data.token);
