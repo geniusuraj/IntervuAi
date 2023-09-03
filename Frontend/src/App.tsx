@@ -1,14 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import All_Routes from './Components/All_Routes';
-import Category from './Pages/Category';
+import React from "react";
+import "./App.css";
+import All_Routes from "./Components/All_Routes";
+import Category from "./Pages/Category";
 
 function App() {
   return (
     <div className="App">
-           {/* <All_Routes/> */}
-           <Category/>
+      <All_Routes />
     </div>
   );
 }
