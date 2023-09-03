@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecordWebcam } from 'react-record-webcam';
 import { BsDownload,BsCameraVideoFill,BsCameraVideoOffFill } from "react-icons/bs";
-
+import cameof from "../Images/camera-off.jpg"
 
 export default function Video() {
   const recordWebcam = useRecordWebcam({ frameRate: 60 });
@@ -16,10 +16,14 @@ export default function Video() {
     }
   };
 
+
+  
   return (
-    <div className="container mx-auto py-4 px-2 sm:px-6 lg:px-8">
-      <p className="text-lg">Camera status: {recordWebcam.status}</p>
-      <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
+    <div className="container mx-auto py-4 px-2 sm:px-6 lg:px-8 rounded">
+
+      <div className="bg-cyan-800 shadow-lg py-4 rounded">
+      {/* <p className="text-lg">Camera status: {recordWebcam.status}</p> */}
+      <div className="flex flex-col max-w-md mx-auto md:flex-row space-y-2 md:space-y-0 md:space-x-2 py-2 ">
         <button
           onClick={recordWebcam.open}
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
@@ -56,9 +60,19 @@ export default function Video() {
        
        
       </div>
-      <div className="mt-4">
-        <video ref={recordWebcam.webcamRef} autoPlay muted className="w-full max-w-md" />
+
+      <div className="mt-4  border-rose-700">
+          {recordWebcam.status === 'CLOSED'?
+          <img src={cameof} alt="" className="w-full  max-w-md mx-auto " />
+          :
+          <video ref={recordWebcam.webcamRef} autoPlay muted className="w-full  max-w-md mx-auto" />
+
+          }
+
       </div>
+
+      </div>
+     
       
     </div>
   );
