@@ -75,7 +75,7 @@ const dispatch = useDispatch();
   return (
 
     <>
-    <Header/>
+    {/* <Header/> */}
     <div className="flex">
       <div className="w-1/2">
         <Video />
@@ -100,7 +100,7 @@ const dispatch = useDispatch();
     {interviewStart && (
             <>
               <h3 className="text-lg font-bold mb-4 text-neutral-900">{questions[currentQuestion]}</h3>
-              <button  onClick={handleNextQuestion} className='bg-gray-500 text-white px-4 py-2 font-medium rounded-full hover:bg-gray-600'>
+              <button  onClick={handleNextQuestion} className='bg-gray-500 text-white px-4 py-2 mb-5 font-medium rounded-full hover:bg-gray-600'>
                   Next
                 </button>
             

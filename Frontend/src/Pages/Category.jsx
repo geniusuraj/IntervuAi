@@ -11,7 +11,7 @@ const Category = () => {
           What kind of interview would you like to practice?
         </h1>
         <div className="flex flex-shrink flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row gap-10 justify-center items-center">
-          <Link to="/node">
+          <Link to="section/node">
 
             {" "}
             <button className="pl-24 pr-24 pt-16 pb-16 rounded-xl hover:shadow-2xl hover:pl-28 hover:pt-20 hover:pb-20 hover:pr-28  hover:bg-slate-900 hover:text-white transition-all  bg-slate-200 text-4xl">
@@ -21,10 +21,7 @@ const Category = () => {
           <Link to="section/mern">
             {" "}
 
-            <button className="pl-24 pr-24 pt-16 pb-16 rounded-xl hover:bg-blue-300 bg-slate-200 text-4xl">
-              MERN{" "}
-
-            <button className="pl-24 pr-24 pt-16 pb-16 rounded-xl hover:shadow-2xl hover:pl-28 hover:pt-20 hover:pb-20 hover:pr-28 hover:bg-slate-900 hover:text-white  transition-all  bg-slate-200 text-4xl">
+          <button className="pl-24 pr-24 pt-16 pb-16 rounded-xl hover:shadow-2xl hover:pl-28 hover:pt-20 hover:pb-20 hover:pr-28 hover:bg-slate-900 hover:text-white  transition-all  bg-slate-200 text-4xl">
               Mern{" "}
 
             </button>

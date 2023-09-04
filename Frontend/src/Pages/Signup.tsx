@@ -6,10 +6,10 @@ import robo from "../Images/robo.png";
 import {useToast} from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom";
 const initState = {
-  firstname: "",
-  lastname: "",
+  firstName: "",
+  lastName: "",
   email: "",
-  mobile: "",
+  mobileNumber: "",
   password: "",
 };
 const Signup = () => {
@@ -68,16 +68,16 @@ const Signup = () => {
               placeholder="FirstName"
               className="p-2 rounded-lg text-lg bg-slate-200"
               onChange={handleChange}
-              name="firstname"
-              value={data.firstname}
+              name="firstName"
+              value={data.firstName}
             />
             <input
               type="text"
               placeholder="Lastname"
               className="p-2 rounded-lg text-lg bg-slate-200"
               onChange={handleChange}
-              name="lastname"
-              value={data.lastname}
+              name="lastName"
+              value={data.lastName}
             />
             <input
               type="email"
@@ -93,8 +93,8 @@ const Signup = () => {
               placeholder="Mobile No."
               className="p-2 rounded-lg text-lg bg-slate-200"
               onChange={handleChange}
-              name="mobile"
-              value={data.mobile}
+              name="mobileNumber"
+              value={data.mobileNumber}
             />
             <input
               type="password"
