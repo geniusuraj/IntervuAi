@@ -1,7 +1,6 @@
 package com.IntervuAi.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.hibernate.annotations.Type;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,25 +9,30 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Interview {
+@Entity(name = "feedback")
+public class FeedBack {
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	private Integer  subjectExperties;
+	private Integer communicationSkill;
+	private Integer problemSolving;
 	
-	@Column(name = "feedbackList")
-	private List<Integer> feedBackList = new ArrayList<>();
 	
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	private User user;
 	
+
 }
