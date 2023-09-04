@@ -3,15 +3,18 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import Video from './Video';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchQuestion, postQuestionAnswer, postUser } from '../Redux/nodeReducer/action';
+import { clearFeedback, fetchQuestion, postQuestionAnswer, postUser } from '../Redux/nodeReducer/action';
 import { NEXT_QUESTION } from '../Redux/nodeReducer/actionType';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from './Header';
+import { BsFillMicFill, BsFillMicMuteFill, BsSoundwave } from 'react-icons/bs';
+import EndInterview from './EndInterview';
 
 const Speech2 = () => {
   const [text, setText] = useState('');
   const [interviewStart, setInterviewStarted] = useState(false);
   const [currentQuestion, setCurrent] = useState(0);
+const navigate=useNavigate()
 
   let { tech = '' } = useParams();
 
@@ -33,7 +36,8 @@ const dispatch = useDispatch();
 
  const handleStartInterview = () => {
     setInterviewStarted(true);
-    dispatch<any>(postUser("moumita@gmail.com"));
+    dispatch<any>(postUser("ad@gmail.com"));
+    dispatch(clearFeedback())
   };
 
  
@@ -59,18 +63,35 @@ const dispatch = useDispatch();
   const handleNextQuestion = () => {
     if (currentQuestion < questions.length) {
     
-      dispatch<any>(postQuestionAnswer(questions[currentQuestion], transcript));
+      // dispatch<any>(postQuestionAnswer(questions[currentQuestion], transcript));
       setCurrent(currentQuestion + 1);
      
       resetTranscript()
-      
-      console.log(questions[currentQuestion],transcript);
+    dispatch(clearFeedback())
+      // console.log(questions[currentQuestion],transcript);
     
+     
     }
+    
+    
+   
   };
 
+const handleFinish=()=>{
+navigate("/endinterview")
+}
+
+
+
+//  console.log("current",currentQuestion);
  
-  
+//  console.log("qlength",questions.length);
+
+
+  const submitQuestion=()=>{
+    dispatch<any>(postQuestionAnswer(questions[currentQuestion], transcript));
+    console.log(questions[currentQuestion],transcript);
+  }
 
   return (
 
@@ -88,7 +109,7 @@ const dispatch = useDispatch();
           
 {
   loading?"Loading...":
-  <button onClick={handleStartInterview} className='bg-gray-500 text-white px-4 py-2 font-medium rounded-full hover:bg-gray-600'>
+  <button onClick={handleStartInterview} className={interviewStart?"":"bg-gray-500 text-white px-4 py-2 font-medium rounded-full hover:bg-gray-600"} >
  {interviewStart?"":"Start interview"}
  
   
@@ -100,11 +121,20 @@ const dispatch = useDispatch();
     {interviewStart && (
             <>
               <h3 className="text-lg font-bold mb-4 text-neutral-900">{questions[currentQuestion]}</h3>
-              <button  onClick={handleNextQuestion} className='bg-gray-500 text-white px-4 py-2 mb-5 font-medium rounded-full hover:bg-gray-600'>
+              {/* <button  onClick={handleNextQuestion} className='bg-gray-500 text-white px-4 py-1 mb-5 font-medium rounded-full hover:bg-gray-600'>
                   Next
-                </button>
+                </button> */}
             
-            
+            {
+              currentQuestion == questions.length-1?
+              <button  onClick={handleFinish} className='bg-gray-500 text-white px-4 py-1 mb-5 font-medium rounded-full hover:bg-gray-600'>
+              Finish
+            </button>
+            :
+            <button  onClick={handleNextQuestion} className='bg-gray-500 text-white px-4 py-1 mb-5 font-medium rounded-full hover:bg-gray-600'>
+            Next
+          </button>
+            }
               
               <div className="btn-style">
                 <textarea
@@ -115,16 +145,20 @@ const dispatch = useDispatch();
                   className="w-full border rounded p-2 mb-4"
                   placeholder="Transcript..."
                 />
-                <button onClick={startListening} className='bg-blue-500 text-white px-4 py-2 font-medium rounded-full mr-2 hover:bg-blue-600'>
-                  {listening ? "Listening..." : "Start listening"}
+                <button onClick={startListening}  
+                className={listening ?'bg-blue-800 text-white px-4 py-2 font-medium rounded-full mr-2 hover:bg-blue-600' : 'bg-blue-500 text-white px-4 py-2 font-medium rounded-full mr-2 hover:bg-blue-600'} >
+                  {listening ? <BsSoundwave/> : <BsFillMicFill/>}
                 </button>
+
+
+                
                 <button onClick={SpeechRecognition.stopListening} className='bg-red-500 text-white px-4 py-2 font-medium rounded-full mr-2 hover:bg-red-600'>
-                  Stop Listening
+                 <BsFillMicMuteFill/>
                 </button>
-                {/* <button className='bg-red-500 text-white px-4 py-2 font-medium rounded-full mr-2 hover:bg-red-600'>
+                <button onClick={submitQuestion}  className='bg-sky-800 text-white px-4 py-1 font-medium rounded-full mr-2 hover:bg-red-600'>
                   Submit
-                </button> */}
-                <button onClick={resetTranscript} className='bg-gray-500 text-white px-4 py-2 font-medium rounded-full hover:bg-gray-600'>
+                </button>
+                <button onClick={resetTranscript} className='bg-gray-500 text-white px-4 py-1 font-medium rounded-full hover:bg-gray-600'>
                   Reset
                 </button>
               
@@ -133,11 +167,22 @@ const dispatch = useDispatch();
 <br />
               <div>
                 
-               <p><b>Communication Skill:</b> {feedback.communicationSkill}</p> 
-               <p><b>Problem Solving Skill:</b> {feedback.problemSolving}</p>
-                <p><b>Subject Experties</b>: {feedback.subjectExperties}</p>
-            
-               <p><b>Feedback:</b>  {feedback.feedBackMessage}</p>
+              {
+                  feedback?
+                  <div>
+                  <h1 className='text-blue-900'><b>Feedback :</b></h1>
+                    <p><b>Communication Skill:</b> {feedback.communicationSkill}</p> 
+                    <p><b>Problem Solving Skill:</b> {feedback.problemSolving}</p>
+                      <p><b>Subject Experties</b>: {feedback.subjectExperties}</p>
+                  
+                    <p><b>Feedback:</b>  {feedback.feedBackMessage}</p>
+
+                  </div>
+           :
+           ""
+
+              }
+                
 
                
               </div>

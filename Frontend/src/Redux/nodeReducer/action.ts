@@ -1,5 +1,5 @@
 // actions.ts
-import { LOADING_QUESTIONS, POST_QUESTION_ANSWER, POST_USER, RECEIVE_QUESTIONS } from "./actionType";
+import { CLEAR_FEEDBACK, LOADING_QUESTIONS, POST_QUESTION_ANSWER, POST_USER, RECEIVE_QUESTIONS } from "./actionType";
 import axios from 'axios';
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk'; // Import ThunkAction
@@ -115,3 +115,8 @@ export const postQuestionAnswer = (question: string, answer: string): ThunkActio
       }
     };
   };
+
+
+  export const clearFeedback = () => ({
+    type: CLEAR_FEEDBACK,
+  });

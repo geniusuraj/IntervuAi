@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div className="flex bg-slate-800 items-center pl-5 pt-3 pr-5 pb-3 justify-between sticky w-full">
-      <div>
+     
+     
+      <div className="flex space-x-5 items-center ">
+      <a href="" className="font-sans text-white font-medium text-xl">INTERVUAI</a>
         <a href="/" className="rounded-lg pl-3 pt-2 pr-3 pb-2 bg-slate-100">
           Dashboard
         </a>

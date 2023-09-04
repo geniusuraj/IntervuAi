@@ -12,6 +12,7 @@ import Signup from "../Pages/Signup";
 
 
 import Interview from '../Pages/Interview'
+import EndInterview from "./EndInterview";
 
 >>>>>>> 5cc167ec7910f04b4b101ab66ba0e012f022681b
 const All_Routes = () => {
@@ -32,7 +33,7 @@ const All_Routes = () => {
        
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-
+        <Route path="/endinterview" element={<EndInterview />} />
 
 >>>>>>> 5cc167ec7910f04b4b101ab66ba0e012f022681b
       </Routes>
