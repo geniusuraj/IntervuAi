@@ -64,7 +64,7 @@ const reducer=(state=initialState,action: any)=>{
 
 
             case POST_QUESTION_ANSWER: {
-                // Clear the transcript and update the current question index
+              
                 return {
                   ...state,
                 
