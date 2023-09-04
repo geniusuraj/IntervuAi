@@ -63,3 +63,6 @@ spring.jpa.hibernate.ddl-auto=update
 - Followed the Code of Conduct.
 - A live demo video is available.
 
+## Entity-Relationship Diagram
+
+![Entity-Relationship Diagram](https://github.com/geniusuraj/IntervuAi/blob/main/Backend/ER-Daigram.png)
