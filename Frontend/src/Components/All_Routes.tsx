@@ -15,10 +15,15 @@ const All_Routes = () => {
     <div>
       <Routes>
 
+      
+        <Route path="section/:tech" element={<Speech2/>} />
+
+
         <Route path="/" element={<Category />} />
-        <Route path="/node" element={<Speech2 />} />
+       
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+
 
       </Routes>
     </div>

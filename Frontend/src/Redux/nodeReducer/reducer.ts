@@ -5,6 +5,7 @@ interface State {
     currentQuestionIndex: number;
     questions: string[];
     loading: boolean;
+    feedback: Object
   }
   
   const initialState: State = {
@@ -12,6 +13,7 @@ interface State {
     currentQuestionIndex: 0,
     questions: [],
     loading: false,
+    feedback: {}
   };
 
 
@@ -65,6 +67,7 @@ const reducer=(state=initialState,action: any)=>{
                   ...state,
                 
                   currentQuestionIndex: state.currentQuestionIndex + 1,
+                  feedback: action.payload
                 };
               }
             default:{

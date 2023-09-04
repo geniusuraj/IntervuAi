@@ -14,7 +14,9 @@ function App() {
   return (
     <div className="App">
 
+
       <Navbar/>
+
            <All_Routes/>
            
        
