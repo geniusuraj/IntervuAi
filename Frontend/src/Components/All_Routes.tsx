@@ -8,7 +8,7 @@ const All_Routes = () => {
     <div>
       <Routes>
         <Route path="/" element={<Category/>} />
-        <Route path="/node" element={<Speech2/>} />
+        <Route path="section/:tech" element={<Speech2/>} />
       </Routes>
     </div>
   );
