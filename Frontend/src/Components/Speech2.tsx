@@ -3,45 +3,47 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import Video from './Video';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchQuestion, postQuestionAnswer } from '../Redux/nodeReducer/action';
+import { fetchQuestion, postQuestionAnswer, postUser } from '../Redux/nodeReducer/action';
 import { NEXT_QUESTION } from '../Redux/nodeReducer/actionType';
+import { useParams } from 'react-router-dom';
+import Header from './Header';
 
 const Speech2 = () => {
   const [text, setText] = useState('');
   const [interviewStart, setInterviewStarted] = useState(false);
   const [currentQuestion, setCurrent] = useState(0);
 
+  let { tech = '' } = useParams();
+
+
+
   const questions = useSelector((state: any) => state.questions);
   const loading = useSelector((state: any) => state.loading);
  const currentQuestionIndex = useSelector((state:any) => state.currentQuestionIndex)
-  
+ let feedback = useSelector((state: any) => state.feedback)
+console.log(feedback);
 
+
+ 
 const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch<any>(fetchQuestion()); 
-  }, [dispatch]);
+    dispatch<any>(fetchQuestion(tech)); 
+  }, [dispatch,tech]);
 
  const handleStartInterview = () => {
     setInterviewStarted(true);
+    dispatch<any>(postUser("moumita@gmail.com"));
   };
 
-  // const handleNextQuestion = () => {
-  //   if (currentQuestion < questions.length - 1) {
-  //     setCurrent(currentQuestion + 1);
-  //   }
-   
-  // };
-
-
-
+ 
 
   const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
 
   const resetTranscript = () => {
     SpeechRecognition.stopListening();
     setText(''); 
-    // SpeechRecognition.startListening(); 
+    SpeechRecognition.startListening(); 
   };
 
 
@@ -55,13 +57,15 @@ const dispatch = useDispatch();
 
   
   const handleNextQuestion = () => {
-    if (currentQuestion < questions.length - 1) {
+    if (currentQuestion < questions.length) {
     
       dispatch<any>(postQuestionAnswer(questions[currentQuestion], transcript));
       setCurrent(currentQuestion + 1);
      
-      console.log(questions[currentQuestion],transcript);
+      resetTranscript()
       
+      console.log(questions[currentQuestion],transcript);
+    
     }
   };
 
@@ -69,6 +73,9 @@ const dispatch = useDispatch();
   
 
   return (
+
+    <>
+    {/* <Header/> */}
     <div className="flex">
       <div className="w-1/2">
         <Video />
@@ -82,7 +89,9 @@ const dispatch = useDispatch();
 {
   loading?"Loading...":
   <button onClick={handleStartInterview} className='bg-gray-500 text-white px-4 py-2 font-medium rounded-full hover:bg-gray-600'>
-  Start interview
+ {interviewStart?"":"Start interview"}
+ 
+  
 </button>
 }
 
@@ -91,7 +100,7 @@ const dispatch = useDispatch();
     {interviewStart && (
             <>
               <h3 className="text-lg font-bold mb-4 text-neutral-900">{questions[currentQuestion]}</h3>
-              <button  onClick={handleNextQuestion} className='bg-gray-500 text-white px-4 py-2 font-medium rounded-full hover:bg-gray-600'>
+              <button  onClick={handleNextQuestion} className='bg-gray-500 text-white px-4 py-2 mb-5 font-medium rounded-full hover:bg-gray-600'>
                   Next
                 </button>
             
@@ -112,13 +121,25 @@ const dispatch = useDispatch();
                 <button onClick={SpeechRecognition.stopListening} className='bg-red-500 text-white px-4 py-2 font-medium rounded-full mr-2 hover:bg-red-600'>
                   Stop Listening
                 </button>
-                <button className='bg-red-500 text-white px-4 py-2 font-medium rounded-full mr-2 hover:bg-red-600'>
+                {/* <button className='bg-red-500 text-white px-4 py-2 font-medium rounded-full mr-2 hover:bg-red-600'>
                   Submit
-                </button>
+                </button> */}
                 <button onClick={resetTranscript} className='bg-gray-500 text-white px-4 py-2 font-medium rounded-full hover:bg-gray-600'>
                   Reset
                 </button>
               
+              </div>
+
+<br />
+              <div>
+                
+               <p><b>Communication Skill:</b> {feedback.communicationSkill}</p> 
+               <p><b>Problem Solving Skill:</b> {feedback.problemSolving}</p>
+                <p><b>Subject Experties</b>: {feedback.subjectExperties}</p>
+            
+               <p><b>Feedback:</b>  {feedback.feedBackMessage}</p>
+
+               
               </div>
             </>
           )}
@@ -133,6 +154,7 @@ const dispatch = useDispatch();
        
       </div>
     </div>
+    </>
   );
 };
 
