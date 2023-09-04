@@ -19,9 +19,9 @@ export default function Video() {
 
   
   return (
-    <div className="container mx-auto py-4 px-2 sm:px-6 lg:px-8 rounded">
+    <div className="container mx-auto py-5 px-2 sm:px-6 lg:px-8 rounded">
 
-      <div className="bg-cyan-800 shadow-lg py-4 rounded">
+      <div className="bg-cyan-800 shadow-lg py-6 rounded">
       {/* <p className="text-lg">Camera status: {recordWebcam.status}</p> */}
       <div className="flex flex-col max-w-md mx-auto md:flex-row space-y-2 md:space-y-0 md:space-x-2 py-2 ">
         <button

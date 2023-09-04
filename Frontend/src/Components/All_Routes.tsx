@@ -9,6 +9,7 @@ import Speech2 from "./Speech2";
 
 
 import Interview from '../Pages/Interview'
+import EndInterview from "./EndInterview";
 
 const All_Routes = () => {
   return (
@@ -23,7 +24,7 @@ const All_Routes = () => {
        
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-
+        <Route path="/endinterview" element={<EndInterview />} />
 
       </Routes>
     </div>

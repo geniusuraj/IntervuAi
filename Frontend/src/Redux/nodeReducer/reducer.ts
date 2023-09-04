@@ -1,11 +1,12 @@
-import { LOADING_QUESTIONS, NEXT_QUESTION, POST_QUESTION_ANSWER, RECEIVE_QUESTIONS, START_INTERVIEW } from "./actionType";
+import { CLEAR_FEEDBACK, LOADING_FEEDBACK, LOADING_QUESTIONS, NEXT_QUESTION, POST_QUESTION_ANSWER, RECEIVE_QUESTIONS, START_INTERVIEW } from "./actionType";
 
 interface State {
     interviewStarted: boolean;
     currentQuestionIndex: number;
     questions: string[];
     loading: boolean;
-    feedback: Object
+    feedback: Object;
+   
   }
   
   const initialState: State = {
@@ -13,7 +14,8 @@ interface State {
     currentQuestionIndex: 0,
     questions: [],
     loading: false,
-    feedback: {}
+    feedback: {},
+    
   };
 
 
@@ -67,8 +69,17 @@ const reducer=(state=initialState,action: any)=>{
                   ...state,
                 
                   currentQuestionIndex: state.currentQuestionIndex + 1,
+                 
                   feedback: action.payload
                 };
+              }
+
+             
+              case CLEAR_FEEDBACK:{
+                return{
+                  ...state,
+                  feedback:null
+                }
               }
             default:{
                 return state
