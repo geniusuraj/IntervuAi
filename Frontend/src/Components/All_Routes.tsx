@@ -7,14 +7,14 @@ import Signup from "../Pages/Signup";
 import Speech from "./Speech";
 import Speech2 from "./Speech2";
 
-import Signup from "../Pages/Signup";
+
 
 
 
 import Interview from '../Pages/Interview'
 import EndInterview from "./EndInterview";
 
->>>>>>> 5cc167ec7910f04b4b101ab66ba0e012f022681b
+
 const All_Routes = () => {
   return (
     <div>
