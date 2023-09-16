@@ -24,16 +24,16 @@ public class botController {
 	private IntervuServiceImpl intervuService;
 
 	String javaPrompt = "I want you to act as an interviewer. I will be the candidate and you will ask me the interview questions for the position of Java Backend Developer. "
-			+ "That will require me to have the following content Core Java , Spring Boot , Spring Secirity, Hibernate, Java Features, HTML, CSS , Javascript, linked list I want you to only reply as the interviewer.Asked me only 3 Questions and every question end with the ? mark "
+			+ "That will require me to have the following content Core Java , Spring Boot , Spring Secirity, Hibernate, Java Features, HTML, CSS , Javascript, linked list I want you to only reply as the interviewer.Asked me only 10 Questions and every question end with the ? mark "
 			+ "in response give me only questions not any other text";
 
 	String mernPrompt = "I want you to act as an interviewer. I will be the candidate and you will ask me the interview questions for the position of Mern Developer. "
-			+ "That will require me to have the following content HTML, CSS, JS, React, Redux, Typescript, Node I want you to only reply as the interviewer.Asked me only 3 Questions and every question end with the ? mark "
+			+ "That will require me to have the following content HTML, CSS, JS, React, Redux, Typescript, Node I want you to only reply as the interviewer.Asked me only 10 Questions and every question end with the ? mark "
 			+ "in response give me only questions not any other text";
 
 	String nodePrompt = "I want you to act as an interviewer. I will be the candidate and you will ask me the interview questions for the position of Node.js Developer. "
 			+ "That will require me to have the following content: JavaScript, Node.js, Express.js, async/await, RESTful APIs, NPM, callbacks, and Promises. "
-			+ "I want you to only reply as the interviewer. Ask me only 3 questions and every question should end with a '?' mark. "
+			+ "I want you to only reply as the interviewer. Ask me only 10 questions and every question should end with a '?' mark. "
 			+ "In response, give me only questions.";
 
 	@Autowired
