@@ -65,6 +65,6 @@ spring.jpa.hibernate.ddl-auto=update
 
 ## Entity-Relationship Diagram
 
-![Entity-Relationship Diagram]()
+![Entity-Relationship Diagram](https://github.com/geniusuraj/IntervuAi/blob/main/intervuai.png)
 
 ![Entity-Relationship Diagram](https://github.com/geniusuraj/IntervuAi/blob/main/Backend/ER-Daigram.png)
